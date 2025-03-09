@@ -42,16 +42,7 @@ while IFS= read -r line; do
 
     # Remove this file from MODULE_IMAGE_FILES array if it exists
     echo "==Module image files begin==: ${MODULE_IMAGE_FILES[@]}"
-    for i in "${!MODULE_IMAGE_FILES[@]}"; do
-        if [[ "${MODULE_IMAGE_FILES[$i]}" == "$MODULE_IMAGE_FILE" ]]; then
-            echo "Removing $MODULE_IMAGE_FILE from MODULE_IMAGE_FILES"
-            unset 'MODULE_IMAGE_FILES[$i]'
-            echo "Removed $MODULE_IMAGE_FILE from MODULE_IMAGE_FILES"
-            break
-        fi
-    done
-    # Re-index array to remove gaps
-    MODULE_IMAGE_FILES=("${MODULE_IMAGE_FILES[@]}")
+    MODULE_IMAGE_FILES=($(echo "${MODULE_IMAGE_FILES[*]}" | sed "s/$MODULE_IMAGE_FILE//g" | tr -s ' '))
     echo "==Module image files end==: ${MODULE_IMAGE_FILES[@]}"
      
   elif [[ -n $MODULE_IMAGE_FILE ]]; then
