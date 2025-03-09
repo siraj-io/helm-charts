@@ -43,7 +43,7 @@ while IFS= read -r line; do
     # Remove this file from MODULE_IMAGE_FILES array if it exists
     echo "==Module image files begin==: ${MODULE_IMAGE_FILES[@]}"
     for i in "${!MODULE_IMAGE_FILES[@]}"; do
-        if [[ "${MODULE_IMAGE_FILES[$i]}" = "$MODULE_IMAGE_FILE" ]]; then
+        if [[ "${MODULE_IMAGE_FILES[$i]}" == "$MODULE_IMAGE_FILE" ]]; then
             unset 'MODULE_IMAGE_FILES[$i]'
         fi
     done
